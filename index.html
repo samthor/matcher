@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Matcher</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+  <link rel="stylesheet" type="text/css" href="styles.css" media="screen" />
+  <link rel="manifest" href="manifest.json" />
+  <script src="elements.js"></script>
+</head>
+<body>
+
+<div id="plane">
+
+<header>
+  <ul class="menu">
+    <h1>Matcher</h1>
+    <li>Help</li>
+    <li>Restart</li>
+  </ul>
+</header>
+
+<div class="player">
+  <h2>Sam</h2>
+  <gem-board id="board"></gem-board>
+</div>
+
+<script>
+const randInt = max => Math.floor(Math.random() * max);
+const dim = board.dim;
+
+for (let i = 0; i < dim * dim * 2; ++i) {
+  board.placeAt(randInt(dim), randInt(dim), 'white');
+}
+</script>
+
+</div>
+
+</body>
+</html>
