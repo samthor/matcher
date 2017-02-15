@@ -19,18 +19,32 @@
   </ul>
 </header>
 
-<div class="player">
+<div class="player" id="player">
   <h2>Sam</h2>
   <gem-board id="board"></gem-board>
 </div>
 
 <script>
+const colors = ['#999', '#c77', '#7c7', '#77c'];
 const randInt = max => Math.floor(Math.random() * max);
 const dim = board.dim;
 
 for (let i = 0; i < dim * dim * 2; ++i) {
-  board.placeAt(randInt(dim), randInt(dim), 'white');
+  const color = colors[randInt(colors.length)];
+  board.placeAt(randInt(dim), randInt(dim), new GemCell(color));
 }
+
+const appear = _ => {
+  const player = document.getElementById('player');
+  const p = player.parentNode;
+  player.remove();
+  player.classList.add('offscreen');
+  p.appendChild(player);
+
+  player.offsetLeft;
+  player.classList.remove('offscreen');
+};
+
 </script>
 
 </div>

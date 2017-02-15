@@ -11,6 +11,7 @@
 body {
   margin: 0;
   overflow-y: hidden;
+  overflow: hidden;
   background: #512DA8;
   font-family: 'Roboto', 'Helvetica', 'Arial', Sans-Serif;
   font-weight: 300;
@@ -75,26 +76,17 @@ ul.menu li:hover {
   background: rgba(255, 255, 255, 0.125);
 }
 
-#surface::after {
-/*  content: '';
-*/
-  left: -100vw;
-  width: 200vw;
-  top: 100%;
-  height: 40px;
-  position: absolute;
-  display: block;
-  transform-origin: 0 0;
-  transform: rotateX(-90deg);
-  background: #673AB7;
-}
-
 gem-board {
-  font-size: 24px;
+  font-size: 32px;
 }
 
 .player {
   transform-style: preserve-3d;
+  transform: translateZ(-32px);
+  transition: transform 1s cubic-bezier(0.130, 0.410, 0.470, 1.165);
+}
+.player.offscreen {
+  transform: translateZ(-32px) translateX(-100vw);
 }
 
 .player h2 {
@@ -104,5 +96,5 @@ gem-board {
   font-size: 20px;
   line-height: 32px;
   transform-origin: 0 100%;
-  transform: rotateX(-90deg);
+  transform: rotateX(-60deg);
 }
