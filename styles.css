@@ -40,16 +40,29 @@ body {
   flex-flow: column;
   transform-style: preserve-3d;
 }
-.plane.mid {
-  transform-origin: 100% 50%;
-  transform: rotateX(40deg) rotate(45deg) translate(-10vmax);
+
+.mid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.mid .plane {
+  pointer-events: auto;
+  transform-origin: 50% 50%;
+  transform: rotateX(40deg) rotate(45deg);
 }
 
 header {
   background: rgba(255, 255, 255, 0.125);
   min-width: 600px;
-  height: 280px;
-  max-height: 50vw;  /* 140px max */
+  height: 200px;
+  max-height: 50vmin;  /* 140px max */
   transform-style: preserve-3d;
   position: relative;
   margin-bottom: 20px;
@@ -85,7 +98,12 @@ header {
 }
 
 gem-board {
-  font-size: 32px;
+  font-size: 12vmin;
+}
+@media (min-width: 600px) and (min-height: 600px) {
+  gem-board {
+    font-size: 48px;
+  }
 }
 
 .player {

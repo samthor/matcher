@@ -260,7 +260,7 @@ class GemBoard extends HTMLElement {
 
       return this.removeCells_(matches)
           .then(_ => afterTime(TRANSITION_TIME))
-          .then(_ => this.fill_(true))
+          .then(_ => this.fill_())  // should probably never give matches, but we should be safe
           .then(internalTick);
     };
 
