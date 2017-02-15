@@ -253,6 +253,16 @@ class GemBoard extends HTMLElement {
       const matches = this.match_();
       totalMatches += matches.size;
 
+      // fun GA logging of matches
+      const byColor = {};
+      matches.forEach(cell => {
+        byColor[cell.color] = (byColor[cell.color] || 0) + 1;
+      });
+      for (let color in byColor) {
+        ga('send', 'event', 'board', 'match', color, byColor[color]);
+      }
+      ga('send', 'event', 'board', 'match', '*', matches.size);
+
       if (!matches.size) {
         this.ticking_ = null;
         return totalMatches;  // this will resolve internal tick
