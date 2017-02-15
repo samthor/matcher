@@ -12,7 +12,7 @@ body {
   margin: 0;
   overflow-y: hidden;
   overflow: hidden;
-  background: #512DA8;
+  background: #512da8;
   font-family: 'Roboto', 'Helvetica', 'Arial', Sans-Serif;
   font-weight: 300;
   color: white;
@@ -30,7 +30,7 @@ body {
   list-style: none;
 }
 
-#plane {
+.plane {
   transform-origin: 100% 0;
   transform: rotateX(40deg) rotate(45deg) translate(50%);
   display: flex;
@@ -38,6 +38,10 @@ body {
   justify-content: center;
   flex-flow: column;
   transform-style: preserve-3d;
+}
+.plane.mid {
+  transform-origin: 100% 50%;
+  transform: rotateX(40deg) rotate(45deg) translate(-10vmax);
 }
 
 header {
@@ -50,7 +54,7 @@ header {
   margin-bottom: 20px;
 }
 
-ul.menu {
+.menu {
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -61,19 +65,22 @@ ul.menu {
   line-height: 28px;
 }
 
-ul.menu li {
-  cursor: pointer;
+.menu a {
+  display: block;
   padding: 8px 16px;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.menu a:focus {
+  outline: 0;
+  background: rgba(255, 255, 255, 0.125);
 }
 
-ul.menu h1 {
+.menu h1 {
   padding: 8px 16px;
   font-weight: 500;
   background: rgba(0, 0, 0, 0.125);
-}
-
-ul.menu li:hover {
-  background: rgba(255, 255, 255, 0.125);
 }
 
 gem-board {
@@ -84,15 +91,22 @@ gem-board {
   transform-style: preserve-3d;
   transform: translateZ(-32px);
   transition: transform 1s cubic-bezier(0.130, 0.410, 0.470, 1.165);
+  will-change: transform;
 }
 .player.offscreen {
   transform: translateZ(-32px) translateX(-100vw);
+}
+.player.fade {
+  transform-style: preserve-3d;
+  transition: transform 2s ease-in, opacity 2s ease-in;
+  transform: translateZ(-10000px);
 }
 
 .player h2 {
   background: rgba(0, 0, 0, 0.125);
   text-align: center;
   margin: 8px 0;
+  border-radius: 12px;
   font-size: 20px;
   line-height: 32px;
   transform-origin: 0 100%;

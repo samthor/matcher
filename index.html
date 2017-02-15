@@ -5,45 +5,47 @@
   <meta name="viewport" content="width=device-width, user-scalable=no" />
   <link rel="stylesheet" type="text/css" href="styles.css" media="screen" />
   <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#512da8" />
   <script src="elements.js"></script>
 </head>
 <body>
 
-<div id="plane">
+<div class="plane">
 
 <header>
-  <ul class="menu">
+  <div class="menu">
     <h1>Matcher</h1>
-    <li>Help</li>
-    <li>Restart</li>
-  </ul>
+    <a href="https://github.com/samthor/matcher" target="_blank">About</a>
+    <a tabindex="0" id="restart">Restart</a>
+  </div>
 </header>
 
 <div class="player" id="player">
-  <h2>Sam</h2>
+  <h2>Player</h2>
   <gem-board id="board"></gem-board>
 </div>
 
 <script>
-const colors = ['#999', '#c77', '#7c7', '#77c'];
-const randInt = max => Math.floor(Math.random() * max);
-const dim = board.dim;
-
-for (let i = 0; i < dim * dim * 2; ++i) {
-  const color = colors[randInt(colors.length)];
-  board.placeAt(randInt(dim), randInt(dim), new GemCell(color));
-}
-
 const appear = _ => {
   const player = document.getElementById('player');
-  const p = player.parentNode;
-  player.remove();
-  player.classList.add('offscreen');
-  p.appendChild(player);
 
-  player.offsetLeft;
-  player.classList.remove('offscreen');
+  board.destroy();
+  player.classList.add('fade');
+
+  window.setTimeout(_ => {
+    const p = player.parentNode;
+    player.classList.remove('fade');
+    player.remove();
+    player.classList.add('offscreen');
+    p.appendChild(player);
+
+    board.fill_();  // TODO: ugly?
+    player.offsetLeft;
+    player.classList.remove('offscreen');
+  }, 2000);
 };
+
+document.getElementById('restart').addEventListener('click', appear);
 
 </script>
 

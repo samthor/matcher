@@ -1,0 +1,31 @@
+{
+  "name": "Matcher",
+  "short_name": "Matcher",
+  "start_url": "./?utm_source=web_app_manifest&utm_medium=web_app_manifest",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "theme_color": "#512da8",
+  "background_color": "#512da8",
+  "icons": [
+    {
+      "src": "icon-16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
