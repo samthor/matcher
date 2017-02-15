@@ -181,28 +181,38 @@ class GemBoard extends HTMLElement {
 
     this.boardEl_ = root.getElementById('board');
 
+    let initialFocus = false;
     let active = null;
     let start = null;
 
+    this.boardEl_.addEventListener('pointerdown', ev => {
+      if (!this.toDef_.has(ev.target)) { return; }
+      active = ev.target;
+
+      if (ev.target === root.activeElement) {
+        initialFocus = true;
+      } else {
+        active.focus();
+        initialFocus = false;
+      }
+
+      start = {x: ev.screenX, y: ev.screenY};
+    });
+    this.boardEl_.addEventListener('pointerup', ev => {
+      if (!initialFocus && active) {
+        active.blur();
+      }
+      active = null;
+      start = null;
+    });
+
     this.boardEl_.addEventListener('pointermove', ev => {
-      if (ev.pressure < 0.1) {
-        active = null;
+      if (!start) {
         return;
       }
 
-      const curr = {x: ev.screenX, y: ev.screenY};
-
-      if (active === null) {
-        if (ev.target !== root.activeElement) { return; }
-        if (!this.toDef_.has(ev.target)) { return; }
-
-        active = ev.target;
-        start = curr;
-        return;
-      }
-
+      const delta = {x: ev.screenX - start.x, y: ev.screenY - start.y};
       const factor = 6;  // TODO: factor should be fn of em
-      const delta = {x: curr.x - start.x, y: curr.y - start.y};
       let dir = null;
       if (delta.x > factor) {
         if (delta.y > factor) {
@@ -220,8 +230,15 @@ class GemBoard extends HTMLElement {
       if (!dir) { return; }
 
       this.move(active, dir);
+
+      if (!initialFocus) {
+        const local = active;
+        window.setTimeout(_ => local.blur(), TRANSITION_TIME);
+      }
+
       active = null;
-    });
+      start = null;
+    }, true);
     this.resize_();
   }
 
